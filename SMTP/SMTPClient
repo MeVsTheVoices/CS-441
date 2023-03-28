@@ -1,0 +1,28 @@
+import smtplib
+from email.mime.text import MIMEText
+
+def sendEmail(from_addr, to_addr_list, cc_addr_list, subject, message, login, password, smtpserver='smtp.gmail.com'):
+    msg = MIMEText(body)
+    msg['Subject'] = subject
+    msg['From'] = from_addr
+    msg['To'] = to_addr_list
+    msg['Cc'] = cc_addr_list
+    server = smtplib.SMTP_SSL(smtpserver)
+    server.login(login, password)
+    problems = server.sendmail(from_addr, to_addr_list, msg.as_string())
+    server.quit()
+
+if __name__ == '__main__':
+    print("To: ", end="")
+    to_addr_list = input()
+    print("Cc: ", end="")
+    cc_addr_list = input()
+    print("Subject: ", end="")
+    subject = input()
+    print("Message: ", end="")
+    body = input()
+    print("Login: ", end="")
+    login = input()
+    print("Password: ", end="")
+    password = input()
+    sendEmail(login, to_addr_list, cc_addr_list, subject, body, login, password)
